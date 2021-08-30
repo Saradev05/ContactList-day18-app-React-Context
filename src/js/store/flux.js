@@ -1,23 +1,107 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contactEntry: {
+				name: "",
+				phone: "",
+				email: "",
+				address: ""
+			},
+			contacts: [],
+			agenda_slug: "nbv"
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getContact(id) {
+				const store = getStore();
+
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+					method: "GET"
+				})
+					.then(response => {
+						return response.json();
+					})
+					.then(json => {
+						setStore({
+							contactEntry: json
+						});
+						console.log("store.contactEntry desde getContactEntry del flux: ", store.contactEntry);
+					})
+					.catch(error => {
+						console.error("Error:", error);
+					});
+			},
+			createContact(data) {
+				const store = getStore();
+				//no hace falta getStore() porque no necesita cambiar nada del store
+
+				fetch("https://assets.breatheco.de/apis/fake/contact/", {
+					method: "POST",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						return response.json();
+					})
+					.then(json => {
+						getActions().conatctsList(store.agenda_slug);
+					})
+					.catch(error => {});
+			},
+			updateContact(id, data) {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+					method: "PUT",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(response => {
+						return response.json();
+					})
+					.then(json => {
+						getActions().contactsList(store.agenda_slug);
+					})
+					.catch(error => {
+						console.error("Error:", error);
+					});
+			},
+			deleteContact(id) {
+				const store = getStore();
+
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+					method: "DELETE"
+				})
+					.then(response => {
+						return response.json();
+					})
+					.then(json => {
+						console.log("json desde deleteContact", json);
+						getActions().contactsList(store.agenda_slug);
+					})
+					.catch(error => {
+						console.error("Error:", error);
+					});
+			},
+			contactsList(slug) {
+				const store = getStore();
+
+				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/" + slug, {
+					method: "GET"
+				})
+					.then(response => {
+						return response.json();
+					})
+					.then(json => {
+						console.log(json, store.contacts);
+						setStore({
+							contacts: json
+						});
+					})
+					.catch(error => {
+						console.error("Error:", error);
+					});
 			},
 			loadSomeData: () => {
 				/**

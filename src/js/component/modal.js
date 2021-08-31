@@ -12,7 +12,7 @@ export const Modal = props => {
 			<div className="modal-dialog" role="document">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h5 className="modal-title">You are about to delete a contact.</h5>
+						<h5 className="modal-title">Are you sure you want to delete this contact?</h5>
 						{props.onClose ? (
 							<button
 								onClick={() => props.onClose()}
@@ -26,9 +26,7 @@ export const Modal = props => {
 							""
 						)}
 					</div>
-					<div className="modal-body">
-						<p> Do you want to delete this contact? </p>
-					</div>
+
 					<div className="modal-footer">
 						{props.onClose ? (
 							<button onClick={() => props.onClose()} type="button" className="btn btn-primary">

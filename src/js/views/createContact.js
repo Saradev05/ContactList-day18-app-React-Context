@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
+import "../../styles/createContact.scss";
 
 export const CreateContact = () => {
 	const { actions, store } = useContext(Context);
@@ -28,9 +29,9 @@ export const CreateContact = () => {
 	};
 
 	return (
-		<div className="casita container  pl-5 pr-5 pb-4">
-			<div className="m-3">
-				<h1 className="text-center mt-5">New contact</h1>
+		<div className="casita container  p-5">
+			<div className="cuadro m-3 pt-3">
+				<h1 className="text-center mt-3">New contact</h1>
 				<form>
 					<div className="form-group ">
 						<label>Full Name</label>

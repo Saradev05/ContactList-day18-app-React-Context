@@ -14,7 +14,7 @@ export const ContactCard = props => {
 		<li className="list-group-item mb-3">
 			<div className="contactBox row  ">
 				<div className="col-12 col-sm-6 col-md-3 px-0">
-					<img src={Chica} alt="..." className="chica rounded-circle mx-auto d-block img-fluid  " />
+					<img src={Chica} alt="..." className="chica rounded-circle pl-2  d-block img-fluid" />
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">

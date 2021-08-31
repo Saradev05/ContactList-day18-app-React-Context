@@ -19,7 +19,7 @@ export const Contacts = () => {
 		<div className="casita container  pl-5 pr-5 pb-4">
 			<div>
 				<p className="text-right my-3">
-					<Link className="btn btn-success" to="/create">
+					<Link className="btn btn-primary" to="/create">
 						Add new contact
 					</Link>
 				</p>
